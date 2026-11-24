@@ -54,6 +54,12 @@ python -I scripts/validate.py --compile /ruta/a/asc
 
 Comprueba los manifiestos, el frontmatter de la skill y los enlaces, y compila cada ejemplo `angelscript` con `asc --check`.
 
+## Créditos
+
+- [AngelScript](https://github.com/anjo76/angelscript) de Andreas Jönsson (licencia zlib): el lenguaje que enseña este kit.
+- [Servidor de lenguaje de AngelScript](https://github.com/Gaftherman/angelscript-lsp): el servidor MCP detrás de las herramientas. Se apoya en [Relrin/tree-sitter-angelscript](https://github.com/Relrin/tree-sitter-angelscript) y en los proyectos de su sección de créditos.
+- [CLI de AngelScript](https://github.com/Gaftherman/angelscript-cli): ejecuta y comprueba los ejemplos.
+
 ## Licencia
 
 [MIT](LICENSE)
