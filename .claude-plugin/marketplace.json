@@ -1,0 +1,11 @@
+{
+  "name": "angelscript-agent-kit",
+  "owner": { "name": "Gaftherman" },
+  "plugins": [
+    {
+      "name": "angelscript-agent-kit",
+      "source": "./",
+      "description": "Skill and MCP configuration for AngelScript with the AngelScript language server."
+    }
+  ]
+}
