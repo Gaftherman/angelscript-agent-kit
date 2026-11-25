@@ -1,5 +1,9 @@
 # Changelog
 
+## [Unreleased]
+
+- Add the "When something is missing" section: ask the user when `workspace_info` reports a missing rules file, stub or entry point, and respect the engine version from `engine_rules`.
+
 ## [0.1.0] - 2026-11-24
 
 - Add the `angelscript` skill with grammar, engine rules, predefined stubs, workflow and CLI references.

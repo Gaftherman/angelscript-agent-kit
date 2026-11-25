@@ -17,11 +17,24 @@ Schema: <https://raw.githubusercontent.com/Gaftherman/angelscript-lsp/main/schem
 | --- | --- | --- |
 | `name` | Display name of the ruleset. | Mention it when you describe the host. |
 | `noHandleTypes` | Value types that cannot have `@` handles. | Never write `T@` or `array<T@>` for these types. |
+| `engine` | The AngelScript release the host embeds: `version`, `source` (`official` or `custom`) and `name`. Default 2.39.0. | Do not use syntax or properties newer than `version`. |
 | `engineProperties` | The host's `asEP_*` settings. | Obey them, see below. |
 | `storageRules` | Where unsafe types may be stored (members, globals, arrays). | Use the `suggestReplacement` type instead of the forbidden storage. |
 | `typeSuggestions` | Discouraged types and their replacement. | Use `toType` when the rule applies to your scope. |
 | `callRules` (alias `schedulerRules`) | Checks on calls: forbidden argument types, forbidden callback parameters, forbidden methods. | Do not pass the forbidden type. Follow `suggestReplacement`. |
 | `unusedSymbolRules` | Which unused symbols are reported and which names the host calls. | Treat `ignoredGlobalFunctions`, lifecycle methods and callbacks as entry points. |
+
+## Minimal file
+
+Offer this when `workspace_info` reports `no-rules-file`, after asking the user for the engine version:
+
+```json
+{
+  "$schema": "https://raw.githubusercontent.com/Gaftherman/angelscript-lsp/main/schemas/angelscript.rules.schema.json",
+  "name": "my-host",
+  "engine": { "version": "2.39.0", "source": "official" }
+}
+```
 
 ## `engineProperties`
 

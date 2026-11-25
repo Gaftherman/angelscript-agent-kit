@@ -15,6 +15,16 @@ AngelScript looks like C++ but has its own rules, and each host registers its ow
 4. **Edit in memory, then validate.** Use `open_document`, `apply_edit` or `replace_document`, then call `diagnostics` on every file you changed. Fix every error before reporting done. Warnings that a `storageRules` or `callRules` entry produced are host constraints, not noise.
 5. **Run it when a runner exists.** `asc --check file.as` compiles without running, `asc file.as` runs it. See [references/cli.md](references/cli.md).
 
+## When something is missing
+
+`workspace_info` returns `warnings`. Each has a `code`, a `message` and an `ask`. When a warning is present, stop and ask the user that question before writing code that depends on it:
+
+- `no-rules-file`: the engine version and engine properties are unknown. Ask which AngelScript version the host embeds (if unsure, the latest, 2.39.0, is assumed) and offer the minimal file in [references/rules-json.md](references/rules-json.md).
+- `no-predefined`: the host API is unknown. Ask for the `.as.predefined` stub or the API reference. Never invent host functions or types.
+- `no-module-entry-point`: ask which script is the entry point and which callbacks the host calls.
+
+`engine_rules` returns an `engine` section with the declared `version` and `source`. A feature newer than that version (for example `foreach` before 2.38) is not available: use the older form. A `custom` engine keeps its `engineProperties` as the source of truth, so ask when something looks unusual instead of assuming vanilla behaviour.
+
 ## Rules that matter most
 
 - Engine properties in `engine_rules` change what is legal: with `disallowGlobalVars` you cannot declare globals, with `requireEnumScope` you must write `Color::Red`.
