@@ -2,6 +2,7 @@
 
 Usage: python -I scripts/validate.py [--compile <path-to-angelscript-cli>]
 """
+
 import json
 import re
 import subprocess

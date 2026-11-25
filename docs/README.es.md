@@ -1,6 +1,6 @@
 # AngelScript Agent Kit
 
-**[English](README.md)** | **[Español](README.es.md)**
+**[English](../README.md)** | **[Español](README.es.md)**
 
 Una skill y una configuración MCP para que un agente de IA lea, escriba y valide AngelScript con el [servidor de lenguaje de AngelScript](https://github.com/Gaftherman/angelscript-lsp).
 
@@ -62,4 +62,4 @@ Comprueba los manifiestos, el frontmatter de la skill y los enlaces, y compila c
 
 ## Licencia
 
-[MIT](LICENSE)
+[MIT](../LICENSE). Para ayudar, lee [CONTRIBUTING.es.md](CONTRIBUTING.es.md).

@@ -1,6 +1,6 @@
 # AngelScript Agent Kit
 
-**[English](README.md)** | **[Español](README.es.md)**
+**[English](README.md)** | **[Español](docs/README.es.md)**
 
 A skill and MCP configuration that let an AI agent read, write and validate AngelScript with the [AngelScript language server](https://github.com/Gaftherman/angelscript-lsp).
 
@@ -62,4 +62,4 @@ It checks the manifests, the skill frontmatter and the links, and compiles every
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE). To help, read [CONTRIBUTING.md](CONTRIBUTING.md).

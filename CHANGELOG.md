@@ -3,6 +3,7 @@
 ## [Unreleased]
 
 - Add the "When something is missing" section: ask the user when `workspace_info` reports a missing rules file, stub or entry point, and respect the engine version from `engine_rules`.
+- Add `CONTRIBUTING.md` and `docs/CONTRIBUTING.es.md`, move the Spanish README to `docs/`, and add `.editorconfig` and `ruff.toml`.
 
 ## [0.1.0] - 2026-11-24
 
