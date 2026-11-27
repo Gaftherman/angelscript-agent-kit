@@ -4,10 +4,17 @@
 
 ## [0.1.1] - 2026-11-25
 
+### Added
+
 - Add the "When something is missing" section: ask the user when `workspace_info` reports a missing rules file, stub or entry point, and respect the engine version from `engine_rules`.
 - Add `CONTRIBUTING.md` and `docs/CONTRIBUTING.es.md`, move the Spanish README to `docs/`, and add `.editorconfig` and `ruff.toml`.
 
+---
+**Full Changelog**: https://github.com/Gaftherman/angelscript-agent-kit/compare/v0.1.0...v0.1.1
+
 ## [0.1.0] - 2026-11-24
+
+### Added
 
 - Add the `angelscript` skill with grammar, engine rules, predefined stubs, workflow and CLI references.
 - Add the Claude Code plugin manifest and the MCP configuration for `angel-lsp --mcp`.
