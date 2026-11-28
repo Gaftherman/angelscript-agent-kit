@@ -28,7 +28,7 @@ TOOLS = {
 }
 # Names of the retired tools of `angel_lsp --mcp`. They must not come back.
 RETIRED = ("workspace_info", "engine_rules", "module_graph", "predefined_lookup", "document_symbols", "open_document", "apply_edit", "replace_document", "angel-lsp")
-MCP_ARGS = ["-y", "@angelscript-tools/mcp@0.1.0"]
+MCP_ARGS = ["-y", "@angelscript-tools/mcp@0.1.1"]
 SKILL_PLUGIN_JSON = "plugins/angelscript/.claude-plugin/plugin.json"
 MCP_PLUGIN_JSON = "plugins/angelscript-mcp/.claude-plugin/plugin.json"
 MCP_JSON = "plugins/angelscript-mcp/.mcp.json"

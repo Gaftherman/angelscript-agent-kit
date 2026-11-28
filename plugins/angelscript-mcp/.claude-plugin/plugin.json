@@ -1,6 +1,6 @@
 {
   "name": "angelscript-mcp",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "MCP server for AngelScript: compile checks, symbol search and host API lookup.",
   "author": {
     "name": "Gaftherman"

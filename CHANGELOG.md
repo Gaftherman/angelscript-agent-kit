@@ -2,6 +2,15 @@
 
 ## [Unreleased]
 
+## [0.2.3] - 2026-11-28
+
+### Changed
+
+- Pin the MCP server to `@angelscript-tools/mcp@0.1.1`, which keeps module paths relative when the root has Windows short names or goes through a link, and ships a container image that starts `angel_lsp`.
+
+---
+**Full Changelog**: https://github.com/angelscript-tools/angelscript-agent-kit/compare/v0.2.2...v0.2.3
+
 ## [0.2.2] - 2026-11-28
 
 ### Fixed

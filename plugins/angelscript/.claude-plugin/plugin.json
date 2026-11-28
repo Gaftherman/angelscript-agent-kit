@@ -1,6 +1,6 @@
 {
   "name": "angelscript",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Skill for writing and checking AngelScript (.as) scripts that run inside a host application.",
   "author": {
     "name": "Gaftherman"
