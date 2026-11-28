@@ -1,0 +1,32 @@
+[
+  {
+    "id": "fix-errors",
+    "prompt": "The scripts in this workspace do not compile. Fix every compile error. Do not invent host API functions; confirm names with the tools. Report the final check result in three lines.",
+    "expect": {
+      "check_errors": 0,
+      "tools_used": ["angelscript_project_info", "angelscript_check"],
+      "stub_unchanged": true
+    }
+  },
+  {
+    "id": "use-host-api",
+    "prompt": "Add a function `void Ambush()` to scripts/main.as. It must spawn the host entity named \"wolf\", write a log line saying it appeared, and damage it by 5. Use only host functions that exist. Fix any other compile error you find. Report the final check result in three lines.",
+    "expect": {
+      "check_errors": 0,
+      "tools_used": ["angelscript_host_api", "angelscript_check"],
+      "stub_unchanged": true,
+      "main_contains": ["Ambush", "{host_spawn}", "{host_damage}", "{host_log}"]
+    }
+  },
+  {
+    "id": "rename-method",
+    "prompt": "Rename the method {script_method} to Advance everywhere it is used, then fix any remaining compile error. Report the final check result in three lines.",
+    "expect": {
+      "check_errors": 0,
+      "tools_used": ["angelscript_check"],
+      "stub_unchanged": true,
+      "main_contains": ["Advance"],
+      "main_lacks": ["{script_method}"]
+    }
+  }
+]

@@ -1,8 +1,8 @@
 {
   "mcpServers": {
     "angelscript": {
-      "command": "angel-lsp",
-      "args": ["--mcp", "--mcp-root", "."]
+      "command": "npx",
+      "args": ["-y", "@angelscript-tools/mcp"]
     }
   }
 }

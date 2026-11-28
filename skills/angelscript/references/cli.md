@@ -15,4 +15,4 @@ asc script.as one "two words"    # arguments reach the script through getArgs()
 - The standard library has `string`, `array`, `dictionary`, math, file, filesystem, date and time, `print`, `println`, `getArgs` and TCP sockets (`tcpConnect`, `tcpListen`).
 - To debug, set `angelscript.runner.path` in VS Code or leave it empty to use the CLI from PATH, then press F5.
 
-Prefer the `diagnostics` tool for fast feedback while editing. Use `asc --check` as the final confirmation that the file compiles outside the editor.
+`asc --check` compiles against the CLI's own standard library only. It does not load a host's `.as.predefined` stubs, so a script that calls host functions fails it. For those scripts use `angelscript_check`. Use `asc --check` for loose scripts that need no host.

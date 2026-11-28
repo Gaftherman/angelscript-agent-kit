@@ -4,18 +4,18 @@ A host registers types and functions in C++, so no `.as` file declares them. A p
 
 ## Finding them
 
-- `workspace_info` returns `activePredefined`, the stubs loaded now.
+- `angelscript_project_info` lists the host API stubs loaded now.
 - Files ending in `.as.predefined` (setting `angelscript.predefinedExtension`) are discovered in the workspace.
 - A stub can `#define WORD` the words the host defines, which `#if` blocks in scripts depend on.
 
 ## Reading the host API
 
-Do not open stubs and scan them by eye. Call `predefined_lookup` with the name you need:
+Do not open stubs and scan them by eye. Call `angelscript_host_api` with the name you need:
 
-- `predefined_lookup("CBaseEntity")` returns the declaration, the file and the documentation of the class.
-- `predefined_lookup("Math::clamp")` finds a namespaced function.
+- `angelscript_host_api(query="CBaseEntity")` returns the declaration, the file, the documentation and the members of the class.
+- `angelscript_host_api(query="Math::clamp")` finds a namespaced function. A part of a name also matches.
 
-If nothing matches, the host does not expose that name. Say so, or find an equivalent with `workspace_symbols`.
+If nothing matches, the host does not expose that name. Say so, or search for an equivalent with a shorter query.
 
 ## What a stub looks like
 

@@ -5,7 +5,7 @@
     {
       "name": "angelscript-agent-kit",
       "source": "./",
-      "description": "Skill and MCP configuration for AngelScript with the AngelScript language server."
+      "description": "Skill and MCP server for AngelScript: compile checks, symbol search and host API lookup."
     }
   ]
 }

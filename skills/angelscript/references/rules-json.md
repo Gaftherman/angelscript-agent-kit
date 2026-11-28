@@ -1,13 +1,13 @@
 # Engine rules (`*.angelscript.rules.json`)
 
-A rules file tells the language server how the host engine is configured, so it reports what the real compiler and the host's safety policy would reject. Do not hand-read it: call `engine_rules`, which returns the rules in effect and the file they came from.
+A rules file tells the language server how the host engine is configured, so it reports what the real compiler and the host's safety policy would reject. Do not hand-read it: call `angelscript_project_info` with `detail: "full"`, which returns the rules in effect and the file they came from.
 
 ## Where the file comes from
 
 1. The `angelscript.rulesFile` setting, if set.
 2. Otherwise the first `*.angelscript.rules.json` found in the workspace root and in the folders of the active predefined stubs.
 
-`workspace_info` reports the path. No file means no host rules: only the default language rules apply.
+`angelscript_project_info` reports the path. No file means no host rules: only the default language rules apply.
 
 Schema: <https://raw.githubusercontent.com/angelscript-tools/angelscript-lsp/main/schemas/angelscript.rules.schema.json>
 
@@ -26,7 +26,7 @@ Schema: <https://raw.githubusercontent.com/angelscript-tools/angelscript-lsp/mai
 
 ## Minimal file
 
-Offer this when `workspace_info` reports `no-rules-file`, after asking the user for the engine version:
+Offer this when `angelscript_project_info` reports `no-rules-file`, after asking the user for the engine version:
 
 ```json
 {
@@ -80,4 +80,4 @@ Meaning: a class member of type `CBaseEntity@` is an error, store an `EHandle`. 
 
 ## Editing a rules file
 
-Only change it when the user asks. After editing, call `workspace_info` and `engine_rules` again to confirm the server loaded it, then call `diagnostics` on a script the rule should affect.
+Only change it when the user asks. After editing, call `angelscript_project_info` with `detail: "full"` again to confirm the server loaded it, then call `angelscript_check` on a script the rule should affect.

@@ -1,6 +1,6 @@
 # AngelScript grammar for agents
 
-The examples below compile with the standard library of the AngelScript CLI (`asc --check`). Host engines add types and functions, so always confirm those with `predefined_lookup`.
+The examples below compile with the standard library of the AngelScript CLI (`asc --check`). Host engines add types and functions, so always confirm those with `angelscript_host_api`.
 
 ## Types
 
@@ -19,7 +19,7 @@ double exact = 0.5;
 - Plain `T value;` of a class type is the object itself. Assigning copies the value unless you use `@`.
 - Assign a handle with `@a = @b;`. Plain `a = b;` copies the object.
 - `is` and `!is` compare handles: `if (h is null)`.
-- Value types such as `string` and `array<T>` cannot have handles unless the host says so. `engine_rules` lists the `noHandleTypes` of the host.
+- Value types such as `string` and `array<T>` cannot have handles unless the host says so. `angelscript_project_info` with `detail: "full"` lists the `noHandleTypes` of the host.
 
 ```angelscript
 class Node { int value; }
@@ -83,7 +83,7 @@ class Box
 }
 ```
 
-They need `propertyAccessorMode` of 2 or higher in the host. `engine_rules` shows it.
+They need `propertyAccessorMode` of 2 or higher in the host. `angelscript_project_info` with `detail: "full"` shows it.
 
 ## Functions, funcdefs, namespaces
 
