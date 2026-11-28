@@ -1,0 +1,11 @@
+{
+  "name": "angelscript",
+  "version": "0.2.1",
+  "description": "Skill for writing and checking AngelScript (.as) scripts that run inside a host application.",
+  "author": { "name": "Gaftherman" },
+  "homepage": "https://github.com/angelscript-tools/angelscript-agent-kit",
+  "repository": "https://github.com/angelscript-tools/angelscript-agent-kit",
+  "license": "MIT",
+  "keywords": ["angelscript", "skill", "language-server", "gamedev"],
+  "icon": "./.claude-plugin/icon.png"
+}

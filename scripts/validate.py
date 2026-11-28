@@ -11,7 +11,9 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-SKILL = ROOT / "skills" / "angelscript"
+SKILL_PLUGIN = ROOT / "plugins" / "angelscript"
+MCP_PLUGIN = ROOT / "plugins" / "angelscript-mcp"
+SKILL = SKILL_PLUGIN / "skills" / "angelscript"
 
 # The tools angelscript-mcp registers. Docs may only name these.
 TOOLS = {
@@ -26,14 +28,21 @@ TOOLS = {
 }
 # Names of the retired tools of `angel_lsp --mcp`. They must not come back.
 RETIRED = ("workspace_info", "engine_rules", "module_graph", "predefined_lookup", "document_symbols", "open_document", "apply_edit", "replace_document", "angel-lsp")
-MCP_ARGS = ["-y", "@angelscript-tools/mcp"]
+MCP_ARGS = ["-y", "@angelscript-tools/mcp@0.1.0"]
+SKILL_PLUGIN_JSON = "plugins/angelscript/.claude-plugin/plugin.json"
+MCP_PLUGIN_JSON = "plugins/angelscript-mcp/.claude-plugin/plugin.json"
+MCP_JSON = "plugins/angelscript-mcp/.mcp.json"
 MANIFESTS = (
-    ".claude-plugin/plugin.json",
+    SKILL_PLUGIN_JSON,
+    MCP_PLUGIN_JSON,
     ".claude-plugin/marketplace.json",
     ".codex-plugin/plugin.json",
     "gemini-extension.json",
-    ".mcp.json",
+    MCP_JSON,
 )
+# The directory takes only these file types in the plugin it receives.
+DIRECTORY_SUFFIXES = {".md", ".json", ".png", ""}
+DIRECTORY_BLOCKED_NAMES = {"agents.md", "claude.md", "claude.local.md", ".mcp.json", "hooks.json", ".lsp.json", "monitors.json"}
 errors: list[str] = []
 
 
@@ -53,24 +62,74 @@ def check_manifests() -> None:
     data = {name: load(name) for name in MANIFESTS}
     versions = {
         name: data[name].get("version")
-        for name in (".claude-plugin/plugin.json", ".codex-plugin/plugin.json", "gemini-extension.json")
+        for name in (SKILL_PLUGIN_JSON, MCP_PLUGIN_JSON, ".codex-plugin/plugin.json", "gemini-extension.json")
     }
     if len(set(versions.values())) != 1:
         fail(f"plugin versions differ: {versions}")
+    listed = {entry.get("name"): entry.get("source") for entry in data[".claude-plugin/marketplace.json"].get("plugins", [])}
+    if listed != {"angelscript": "./plugins/angelscript", "angelscript-mcp": "./plugins/angelscript-mcp"}:
+        fail(f".claude-plugin/marketplace.json: must list the two plugins under ./plugins, found {listed}")
+    if (ROOT / ".claude-plugin" / "plugin.json").exists():
+        fail(".claude-plugin/plugin.json: the repository root is not a plugin; keep the manifests under plugins/")
     servers = {
-        ".mcp.json": data[".mcp.json"].get("mcpServers", {}).get("angelscript", {}),
+        MCP_JSON: data[MCP_JSON].get("mcpServers", {}).get("angelscript", {}),
         "gemini-extension.json": data["gemini-extension.json"].get("mcpServers", {}).get("angelscript", {}),
     }
     for name, server in servers.items():
         if server.get("command") != "npx" or server.get("args") != MCP_ARGS:
             fail(f"{name}: the angelscript MCP server must run `npx {' '.join(MCP_ARGS)}`")
-    for name in (".claude-plugin/plugin.json", ".codex-plugin/plugin.json"):
-        if data[name].get("mcpServers") != "./.mcp.json":
-            fail(f"{name}: mcpServers must point to ./.mcp.json")
-    if data[".codex-plugin/plugin.json"].get("skills") != "./skills/":
-        fail(".codex-plugin/plugin.json: skills must be ./skills/")
+    if data[MCP_PLUGIN_JSON].get("mcpServers") != "./.mcp.json":
+        fail(f"{MCP_PLUGIN_JSON}: mcpServers must point to ./.mcp.json")
+    if data[".codex-plugin/plugin.json"].get("mcpServers") != "./plugins/angelscript-mcp/.mcp.json":
+        fail(".codex-plugin/plugin.json: mcpServers must point to ./plugins/angelscript-mcp/.mcp.json")
+    if data[".codex-plugin/plugin.json"].get("skills") != "./plugins/angelscript/skills/":
+        fail(".codex-plugin/plugin.json: skills must be ./plugins/angelscript/skills/")
     if not (ROOT / data["gemini-extension.json"].get("contextFileName", "missing")).exists():
         fail("gemini-extension.json: contextFileName does not exist")
+
+
+def png_size(path: Path) -> tuple[int, int] | None:
+    header = path.read_bytes()[:24]
+    if len(header) < 24 or header[:8] != b"\x89PNG\r\n\x1a\n":
+        return None
+    return int.from_bytes(header[16:20], "big"), int.from_bytes(header[20:24], "big")
+
+
+def check_directory_plugin() -> None:
+    """The skill plugin is the folder submitted to the plugin directory, which accepts only inert files."""
+    if not SKILL_PLUGIN.is_dir():
+        fail("plugins/angelscript is missing")
+        return
+    manifest = load(SKILL_PLUGIN_JSON)
+    if "mcpServers" in manifest:
+        fail(f"{SKILL_PLUGIN_JSON}: the directory refuses plugins that start a local MCP server; declare it in plugins/angelscript-mcp")
+    for path in sorted(SKILL_PLUGIN.rglob("*")):
+        if not path.is_file():
+            continue
+        name = path.relative_to(ROOT).as_posix()
+        if path.suffix.lower() not in DIRECTORY_SUFFIXES or (path.suffix == "" and path.name != "LICENSE"):
+            fail(f"{name}: file type not accepted by the directory")
+        if path.name.lower() in DIRECTORY_BLOCKED_NAMES:
+            fail(f"{name}: file name not accepted by the directory")
+        if "__pycache__" in path.parts or "node_modules" in path.parts:
+            fail(f"{name}: folder not accepted by the directory")
+        if path.suffix.lower() != ".png":
+            data = path.read_bytes()
+            if data.startswith(b"#!") or b"\0" in data:
+                fail(f"{name}: must be UTF-8 text without #! or NUL bytes")
+    icon = SKILL_PLUGIN / ".claude-plugin" / "icon.png"
+    size = png_size(icon) if icon.exists() else None
+    if size is None:
+        fail("plugins/angelscript/.claude-plugin/icon.png: missing or not a PNG")
+    elif size[0] != size[1] or not 512 <= size[0] <= 2048 or icon.stat().st_size >= 2_000_000:
+        fail(f"plugins/angelscript/.claude-plugin/icon.png: must be square, 512-2048 px and under 2 MB, found {size}")
+    if manifest.get("icon") != "./.claude-plugin/icon.png":
+        fail(f"{SKILL_PLUGIN_JSON}: icon must be ./.claude-plugin/icon.png")
+    if not (ROOT / ".gitignore").exists() or "__pycache__" not in (ROOT / ".gitignore").read_text(encoding="utf-8"):
+        fail(".gitignore must ignore __pycache__")
+    tracked_binaries = [p for p in ROOT.rglob("*.pyc") if ".git" not in p.parts]
+    if tracked_binaries:
+        fail(f"remove compiled files: {[p.relative_to(ROOT).as_posix() for p in tracked_binaries]}")
 
 
 def check_frontmatter() -> None:
@@ -150,6 +209,7 @@ def check_samples(cli: str) -> None:
 
 def main() -> int:
     check_manifests()
+    check_directory_plugin()
     check_frontmatter()
     check_tool_names()
     check_links()

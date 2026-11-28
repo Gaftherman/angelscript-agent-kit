@@ -1,14 +1,22 @@
 {
   "name": "angelscript-agent-kit",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Skill and MCP server for AngelScript: compile checks, symbol search and host API lookup for AI agents.",
-  "author": { "name": "Gaftherman" },
+  "author": {
+    "name": "Gaftherman"
+  },
   "homepage": "https://github.com/angelscript-tools/angelscript-agent-kit",
   "repository": "https://github.com/angelscript-tools/angelscript-agent-kit",
   "license": "MIT",
-  "keywords": ["angelscript", "mcp", "skill", "language-server", "gamedev"],
-  "skills": "./skills/",
-  "mcpServers": "./.mcp.json",
+  "keywords": [
+    "angelscript",
+    "mcp",
+    "skill",
+    "language-server",
+    "gamedev"
+  ],
+  "skills": "./plugins/angelscript/skills/",
+  "mcpServers": "./plugins/angelscript-mcp/.mcp.json",
   "interface": {
     "displayName": "AngelScript",
     "shortDescription": "Check, search and look up the host API of AngelScript scripts",

@@ -2,6 +2,20 @@
 
 ## [Unreleased]
 
+## [0.2.1] - 2026-11-28
+
+### Changed
+
+- Split the Claude plugin in two so the skill can go through the plugin directory: `plugins/angelscript` holds the skill and an icon, `plugins/angelscript-mcp` holds the MCP server. The repository root is no longer a plugin.
+- Pin the MCP server to `@angelscript-tools/mcp@0.1.0` in every manifest.
+
+### Added
+
+- Add a 512 px icon for the skill plugin, a `.gitignore`, and a validator check that the skill plugin holds only the file types the plugin directory accepts.
+
+---
+**Full Changelog**: https://github.com/angelscript-tools/angelscript-agent-kit/compare/v0.2.0...v0.2.1
+
 ## [0.2.0] - 2026-11-28
 
 ### Fixed

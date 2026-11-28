@@ -15,11 +15,13 @@ You need Node.js 20 or newer. The MCP server runs with `npx`, and downloads the 
 
 | Agent | Command |
 | --- | --- |
-| Claude Code | `/plugin marketplace add angelscript-tools/angelscript-agent-kit` then `/plugin install angelscript-agent-kit --marketplace angelscript-tools/angelscript-agent-kit` |
+| Claude Code | `/plugin marketplace add angelscript-tools/angelscript-agent-kit`, then `/plugin install angelscript@angelscript-agent-kit` and `/plugin install angelscript-mcp@angelscript-agent-kit` |
 | Codex | `codex plugin marketplace add angelscript-tools/angelscript-agent-kit` then `codex plugin add angelscript-agent-kit@angelscript-agent-kit` |
 | Gemini CLI | `gemini extensions install https://github.com/angelscript-tools/angelscript-agent-kit` |
-| Antigravity (`agy`) | `git clone https://github.com/angelscript-tools/angelscript-agent-kit` then `agy plugin install ./angelscript-agent-kit` |
-| Any other | Add the MCP server below and copy `skills/angelscript/` into the agent's skills folder |
+| Antigravity (`agy`) | `git clone https://github.com/angelscript-tools/angelscript-agent-kit` then `agy plugin install ./angelscript-agent-kit/plugins/angelscript` and `agy plugin install ./angelscript-agent-kit/plugins/angelscript-mcp` |
+| Any other | Add the MCP server below and copy `plugins/angelscript/skills/angelscript/` into the agent's skills folder |
+
+Claude Code gets two plugins: `angelscript` (the skill, the part submitted to the Claude plugin directory) and `angelscript-mcp` (the MCP server, which starts a local command and so is installed from this marketplace only).
 
 The MCP server on its own:
 

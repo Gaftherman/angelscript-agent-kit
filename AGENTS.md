@@ -9,4 +9,4 @@ Use the angelscript MCP tools for any task that touches `.as` scripts, `.as.pred
 5. Run `angelscript_check` after every edit and fix every error before you report done.
 6. Rename with `angelscript_rename_symbol`: preview first, then `apply=true`.
 
-Name symbols as `Namespace::Class::member`, or pass `path/to/file.as:LINE` when a name is ambiguous. More detail is in `skills/angelscript/`.
+Name symbols as `Namespace::Class::member`, or pass `path/to/file.as:LINE` when a name is ambiguous. More detail is in `plugins/angelscript/skills/angelscript/`.

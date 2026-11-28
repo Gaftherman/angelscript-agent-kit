@@ -33,6 +33,10 @@ Name symbols as `Namespace::Class::member`. When a name is ambiguous or overload
 5. **Check after every edit.** Call `angelscript_check`. Fix every error before you report done. A warning from a `storageRules` or `callRules` entry is a host constraint, not noise.
 6. **Changing a signature?** Call `angelscript_find_references` first, update each caller, then check those files too.
 
+## When the angelscript tools are missing
+
+If no `angelscript_*` tool is available, the MCP server is not installed. Tell the user to install it from the [angelscript-mcp README](https://github.com/angelscript-tools/angelscript-mcp#install). Until then, check scripts that do not call the host API with `asc --check` ([references/cli.md](references/cli.md)). It does not load host stubs, so it cannot check the others.
+
 ## When setup is missing
 
 `angelscript_project_info` lists warnings, each with a `code` and a question. Do not stop the task for a gap it does not need. Finish with the defaults and say in your report what was missing. Ask the user only in these cases:

@@ -50,7 +50,7 @@ def check_errors(args: argparse.Namespace, root: Path) -> int:
 
 def run_codex(args: argparse.Namespace, root: Path, prompt: str) -> str:
     if not args.no_skill:
-        shutil.copytree(ROOT / "skills" / "angelscript", root / ".agents" / "skills" / "angelscript")
+        shutil.copytree(ROOT / "plugins" / "angelscript" / "skills" / "angelscript", root / ".agents" / "skills" / "angelscript")
     server = [
         "-c", f"mcp_servers.angelscript.command={toml_string('node')}",
         "-c", "mcp_servers.angelscript.args=" + json.dumps([args.mcp_entry, "--root", str(root), "--lsp-path", args.lsp_path]).replace("\\\\", "/"),
@@ -64,7 +64,7 @@ def run_codex(args: argparse.Namespace, root: Path, prompt: str) -> str:
 def run_agy(args: argparse.Namespace, root: Path, prompt: str) -> str:
     if not args.no_skill:
         shutil.copy(ROOT / "AGENTS.md", root / "AGENTS.md")
-        shutil.copytree(ROOT / "skills" / "angelscript", root / ".agents" / "skills" / "angelscript")
+        shutil.copytree(ROOT / "plugins" / "angelscript" / "skills" / "angelscript", root / ".agents" / "skills" / "angelscript")
     name = "zz-angelscript-eval"
     agy = tool("agy")
     subprocess.run([agy, "mcp", "add", name, "node", args.mcp_entry, "--root", str(root), "--lsp-path", args.lsp_path], check=True, capture_output=True)

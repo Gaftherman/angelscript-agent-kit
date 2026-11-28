@@ -1,11 +1,21 @@
 {
   "name": "angelscript-agent-kit",
-  "owner": { "name": "Gaftherman" },
+  "owner": {
+    "name": "Gaftherman"
+  },
+  "metadata": {
+    "description": "Skill and MCP server for writing and checking AngelScript scripts."
+  },
   "plugins": [
     {
-      "name": "angelscript-agent-kit",
-      "source": "./",
-      "description": "Skill and MCP server for AngelScript: compile checks, symbol search and host API lookup."
+      "name": "angelscript",
+      "source": "./plugins/angelscript",
+      "description": "Skill for writing and checking AngelScript scripts."
+    },
+    {
+      "name": "angelscript-mcp",
+      "source": "./plugins/angelscript-mcp",
+      "description": "MCP server for AngelScript: compile checks, symbol search and host API lookup."
     }
   ]
 }

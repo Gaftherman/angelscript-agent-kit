@@ -20,7 +20,9 @@ jobs:
       - name: Check the version
         run: |
           version="${GITHUB_REF_NAME#v}"
-          grep -q "\"version\": \"${version}\"" .claude-plugin/plugin.json || { echo "::error::plugin.json does not declare version ${version}."; exit 1; }
+          for manifest in plugins/angelscript/.claude-plugin/plugin.json plugins/angelscript-mcp/.claude-plugin/plugin.json .codex-plugin/plugin.json gemini-extension.json; do
+            grep -q "\"version\": \"${version}\"" "$manifest" || { echo "::error::${manifest} does not declare version ${version}."; exit 1; }
+          done
       - name: Release notes from the changelog
         run: |
           version="${GITHUB_REF_NAME#v}"

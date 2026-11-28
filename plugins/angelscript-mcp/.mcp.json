@@ -2,7 +2,7 @@
   "mcpServers": {
     "angelscript": {
       "command": "npx",
-      "args": ["-y", "@angelscript-tools/mcp"]
+      "args": ["-y", "@angelscript-tools/mcp@0.1.0"]
     }
   }
 }
