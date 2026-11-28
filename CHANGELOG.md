@@ -2,6 +2,20 @@
 
 ## [Unreleased]
 
+## [0.2.2] - 2026-11-28
+
+### Fixed
+
+- Stop tracking the compiled `evals/__pycache__` file that made the release validation fail, and check compiled files against what git tracks instead of the working tree.
+
+### Added
+
+- Add `PRIVACY.md` and the `documentationUrl`, `supportUrl`, `privacyPolicyUrl` and `termsOfServiceUrl` fields to both plugin manifests, and an install line to the skill plugin README, as the plugin directory listing asks.
+
+### Changed
+
+- Use the new icon for both plugins; `plugins/angelscript-mcp` now has one too, and the validator checks both.
+
 ## [0.2.1] - 2026-11-28
 
 ### Changed

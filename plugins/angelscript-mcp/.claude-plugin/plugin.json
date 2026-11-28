@@ -1,11 +1,23 @@
 {
   "name": "angelscript-mcp",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "MCP server for AngelScript: compile checks, symbol search and host API lookup.",
-  "author": { "name": "Gaftherman" },
+  "author": {
+    "name": "Gaftherman"
+  },
   "homepage": "https://github.com/angelscript-tools/angelscript-mcp",
   "repository": "https://github.com/angelscript-tools/angelscript-agent-kit",
+  "documentationUrl": "https://github.com/angelscript-tools/angelscript-agent-kit#readme",
+  "supportUrl": "https://github.com/angelscript-tools/angelscript-agent-kit/issues",
+  "privacyPolicyUrl": "https://github.com/angelscript-tools/angelscript-agent-kit/blob/main/PRIVACY.md",
+  "termsOfServiceUrl": "https://github.com/angelscript-tools/angelscript-agent-kit/blob/main/LICENSE",
   "license": "MIT",
-  "keywords": ["angelscript", "mcp", "language-server", "gamedev"],
+  "keywords": [
+    "angelscript",
+    "mcp",
+    "language-server",
+    "gamedev"
+  ],
+  "icon": "./.claude-plugin/icon.png",
   "mcpServers": "./.mcp.json"
 }

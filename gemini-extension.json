@@ -1,6 +1,6 @@
 {
   "name": "angelscript-agent-kit",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Skill and MCP server for AngelScript: compile checks, symbol search and host API lookup for AI agents.",
   "contextFileName": "AGENTS.md",
   "mcpServers": {

@@ -95,6 +95,32 @@ def png_size(path: Path) -> tuple[int, int] | None:
     return int.from_bytes(header[16:20], "big"), int.from_bytes(header[20:24], "big")
 
 
+def check_icon(plugin: Path, manifest_name: str) -> None:
+    """Each plugin needs a square PNG icon of 512-2048 px under 2 MB, declared in its manifest."""
+    rel = (plugin / ".claude-plugin" / "icon.png").relative_to(ROOT).as_posix()
+    icon = ROOT / rel
+    size = png_size(icon) if icon.exists() else None
+    if size is None:
+        fail(f"{rel}: missing or not a PNG")
+    elif size[0] != size[1] or not 512 <= size[0] <= 2048 or icon.stat().st_size >= 2_000_000:
+        fail(f"{rel}: must be square, 512-2048 px and under 2 MB, found {size}")
+    manifest = load(manifest_name)
+    if manifest.get("icon") != "./.claude-plugin/icon.png":
+        fail(f"{manifest_name}: icon must be ./.claude-plugin/icon.png")
+    for field in ("documentationUrl", "supportUrl", "privacyPolicyUrl", "termsOfServiceUrl"):
+        if not str(manifest.get(field, "")).startswith("https://"):
+            fail(f"{manifest_name}: {field} must be an https URL")
+
+
+def tracked_files(pattern: str) -> list[str]:
+    """Files git tracks that match the pattern; the working tree is the fallback outside a checkout."""
+    try:
+        result = subprocess.run(["git", "ls-files", pattern, f"**/{pattern}"], cwd=ROOT, capture_output=True, text=True, check=True)
+        return sorted(set(result.stdout.split()))
+    except (OSError, subprocess.CalledProcessError):
+        return sorted(p.relative_to(ROOT).as_posix() for p in ROOT.rglob(pattern) if ".git" not in p.parts)
+
+
 def check_directory_plugin() -> None:
     """The skill plugin is the folder submitted to the plugin directory, which accepts only inert files."""
     if not SKILL_PLUGIN.is_dir():
@@ -117,19 +143,13 @@ def check_directory_plugin() -> None:
             data = path.read_bytes()
             if data.startswith(b"#!") or b"\0" in data:
                 fail(f"{name}: must be UTF-8 text without #! or NUL bytes")
-    icon = SKILL_PLUGIN / ".claude-plugin" / "icon.png"
-    size = png_size(icon) if icon.exists() else None
-    if size is None:
-        fail("plugins/angelscript/.claude-plugin/icon.png: missing or not a PNG")
-    elif size[0] != size[1] or not 512 <= size[0] <= 2048 or icon.stat().st_size >= 2_000_000:
-        fail(f"plugins/angelscript/.claude-plugin/icon.png: must be square, 512-2048 px and under 2 MB, found {size}")
-    if manifest.get("icon") != "./.claude-plugin/icon.png":
-        fail(f"{SKILL_PLUGIN_JSON}: icon must be ./.claude-plugin/icon.png")
+    check_icon(SKILL_PLUGIN, SKILL_PLUGIN_JSON)
+    check_icon(MCP_PLUGIN, MCP_PLUGIN_JSON)
     if not (ROOT / ".gitignore").exists() or "__pycache__" not in (ROOT / ".gitignore").read_text(encoding="utf-8"):
         fail(".gitignore must ignore __pycache__")
-    tracked_binaries = [p for p in ROOT.rglob("*.pyc") if ".git" not in p.parts]
-    if tracked_binaries:
-        fail(f"remove compiled files: {[p.relative_to(ROOT).as_posix() for p in tracked_binaries]}")
+    compiled = tracked_files("*.pyc")
+    if compiled:
+        fail(f"remove compiled files from git: {compiled}")
 
 
 def check_frontmatter() -> None:

@@ -26,7 +26,14 @@ Claude Code gets two plugins: `angelscript` (the skill, the part submitted to th
 The MCP server on its own:
 
 ~~~json
-{ "mcpServers": { "angelscript": { "command": "npx", "args": ["-y", "@angelscript-tools/mcp"] } } }
+{
+  "mcpServers": {
+    "angelscript": {
+      "command": "npx",
+      "args": ["-y", "@angelscript-tools/mcp"]
+    }
+  }
+}
 ~~~
 
 - **Codex without the plugin:** `codex mcp add angelscript -- npx -y @angelscript-tools/mcp`
