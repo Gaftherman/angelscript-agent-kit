@@ -13,13 +13,46 @@ La skill enseña el flujo de trabajo y las trampas del lenguaje. El servidor MCP
 
 Necesitas Node.js 20 o superior. El servidor MCP se ejecuta con `npx` y descarga la primera vez el [servidor de lenguaje](https://github.com/angelscript-tools/angelscript-lsp/releases) que envuelve.
 
-| Agente | Comando |
-| --- | --- |
-| Claude Code | `/plugin marketplace add angelscript-tools/angelscript-agent-kit`, luego `/plugin install angelscript@angelscript-agent-kit` y `/plugin install angelscript-mcp@angelscript-agent-kit` |
-| Codex | `codex plugin marketplace add angelscript-tools/angelscript-agent-kit` y luego `codex plugin add angelscript-agent-kit@angelscript-agent-kit` |
-| Gemini CLI | `gemini extensions install https://github.com/angelscript-tools/angelscript-agent-kit` |
-| Antigravity (`agy`) | `git clone https://github.com/angelscript-tools/angelscript-agent-kit` y luego `agy plugin install ./angelscript-agent-kit/plugins/angelscript` y `agy plugin install ./angelscript-agent-kit/plugins/angelscript-mcp` |
-| Cualquier otro | Añade el servidor MCP de abajo y copia `plugins/angelscript/skills/angelscript/` en la carpeta de skills del agente |
+Elige tu agente. Todos reciben la skill y el servidor MCP.
+
+### Claude Code
+
+~~~text
+/plugin marketplace add angelscript-tools/angelscript-agent-kit
+/plugin install angelscript@angelscript-agent-kit
+/plugin install angelscript-mcp@angelscript-agent-kit
+~~~
+
+### Codex
+
+~~~sh
+codex plugin marketplace add angelscript-tools/angelscript-agent-kit
+codex plugin add angelscript@angelscript-agent-kit
+codex plugin add angelscript-mcp@angelscript-agent-kit
+~~~
+
+En ejecuciones no interactivas como `codex exec`, `npx` puede arrancar después del primer turno y faltan las herramientas. Para eso, instala el servidor una vez con `npm install -g @angelscript-tools/mcp`, añade solo el primer plugin y registra el servidor con `codex mcp add angelscript -- angelscript-mcp`.
+
+### Gemini CLI
+
+~~~sh
+gemini extensions install https://github.com/angelscript-tools/angelscript-agent-kit
+gemini skills install https://github.com/angelscript-tools/angelscript-agent-kit --path plugins/angelscript/skills/angelscript
+~~~
+
+La extensión añade el servidor MCP y el contexto del proyecto; el segundo comando añade la skill.
+
+### Antigravity (`agy`)
+
+~~~sh
+git clone https://github.com/angelscript-tools/angelscript-agent-kit
+agy plugin install ./angelscript-agent-kit/plugins/angelscript
+agy plugin install ./angelscript-agent-kit/plugins/angelscript-mcp
+~~~
+
+### Cualquier otro agente
+
+Añade el servidor MCP de abajo y copia `plugins/angelscript/skills/angelscript/` en la carpeta de skills del agente.
 
 Claude Code recibe dos plugins: `angelscript` (la skill, la parte que se envía al directorio de plugins de Claude) y `angelscript-mcp` (el servidor MCP, que inicia un comando local y por eso se instala solo desde este marketplace).
 
@@ -94,10 +127,14 @@ Abre un [issue](https://github.com/angelscript-tools/angelscript-agent-kit/issue
 
 | Proyecto | Uso |
 | --- | --- |
-| [angelscript-mcp](https://github.com/angelscript-tools/angelscript-mcp) | El servidor MCP detrás de este kit |
 | [angelscript-lsp](https://github.com/angelscript-tools/angelscript-lsp) | El servidor de lenguaje que envuelve el servidor MCP |
 | [angelscript-cli](https://github.com/angelscript-tools/angelscript-cli) | Ejecuta y comprueba scripts desde el terminal |
+| [angelscript-mcp](https://github.com/angelscript-tools/angelscript-mcp) | El servidor MCP detrás de este kit |
 | [angelscript-dap](https://github.com/angelscript-tools/angelscript-dap) | Núcleo del depurador |
+| [angelscript-debugger-example](https://github.com/angelscript-tools/angelscript-debugger-example) | Una aplicación que muestra cómo integrar el depurador |
+| [angelscript-jit](https://github.com/angelscript-tools/angelscript-jit) | Compilador JIT opcional |
+| [angelscript-engine](https://github.com/angelscript-tools/angelscript-engine) | Builds del SDK con parches para AngelScript 2.20 a 2.39 |
+| [tree-sitter-angelscript](https://github.com/angelscript-tools/tree-sitter-angelscript) | Gramática de Tree-sitter que usa el servidor de lenguaje |
 
 ## Créditos
 

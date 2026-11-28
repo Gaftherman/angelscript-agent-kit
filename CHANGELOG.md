@@ -2,6 +2,16 @@
 
 ## [Unreleased]
 
+### Fixed
+
+- Use the plugin IDs the marketplace really lists for Codex (`angelscript` and `angelscript-mcp`); `angelscript-agent-kit@angelscript-agent-kit` does not exist.
+- Install the skill in Gemini CLI with `gemini skills install ... --path`, because the extension only loads the MCP server and the project context.
+- Explain that `codex exec` can start before `npx` has connected the MCP server, and give the global install that avoids it.
+
+### Changed
+
+- Show the install steps of each agent as a short block of commands instead of one table row.
+
 ## [0.2.3] - 2026-11-28
 
 ### Changed

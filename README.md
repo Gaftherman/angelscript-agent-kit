@@ -13,13 +13,46 @@ The skill teaches the workflow and the traps of the language. The MCP server, [a
 
 You need Node.js 20 or newer. The MCP server runs with `npx`, and downloads the [language server](https://github.com/angelscript-tools/angelscript-lsp/releases) it wraps on first use.
 
-| Agent | Command |
-| --- | --- |
-| Claude Code | `/plugin marketplace add angelscript-tools/angelscript-agent-kit`, then `/plugin install angelscript@angelscript-agent-kit` and `/plugin install angelscript-mcp@angelscript-agent-kit` |
-| Codex | `codex plugin marketplace add angelscript-tools/angelscript-agent-kit` then `codex plugin add angelscript-agent-kit@angelscript-agent-kit` |
-| Gemini CLI | `gemini extensions install https://github.com/angelscript-tools/angelscript-agent-kit` |
-| Antigravity (`agy`) | `git clone https://github.com/angelscript-tools/angelscript-agent-kit` then `agy plugin install ./angelscript-agent-kit/plugins/angelscript` and `agy plugin install ./angelscript-agent-kit/plugins/angelscript-mcp` |
-| Any other | Add the MCP server below and copy `plugins/angelscript/skills/angelscript/` into the agent's skills folder |
+Pick your agent. Each one gets the skill and the MCP server.
+
+### Claude Code
+
+~~~text
+/plugin marketplace add angelscript-tools/angelscript-agent-kit
+/plugin install angelscript@angelscript-agent-kit
+/plugin install angelscript-mcp@angelscript-agent-kit
+~~~
+
+### Codex
+
+~~~sh
+codex plugin marketplace add angelscript-tools/angelscript-agent-kit
+codex plugin add angelscript@angelscript-agent-kit
+codex plugin add angelscript-mcp@angelscript-agent-kit
+~~~
+
+In non-interactive runs such as `codex exec`, `npx` can start after the first turn and the tools are missing. For those, install the server once with `npm install -g @angelscript-tools/mcp`, add only the first plugin and register the server with `codex mcp add angelscript -- angelscript-mcp`.
+
+### Gemini CLI
+
+~~~sh
+gemini extensions install https://github.com/angelscript-tools/angelscript-agent-kit
+gemini skills install https://github.com/angelscript-tools/angelscript-agent-kit --path plugins/angelscript/skills/angelscript
+~~~
+
+The extension adds the MCP server and the project context; the second command adds the skill.
+
+### Antigravity (`agy`)
+
+~~~sh
+git clone https://github.com/angelscript-tools/angelscript-agent-kit
+agy plugin install ./angelscript-agent-kit/plugins/angelscript
+agy plugin install ./angelscript-agent-kit/plugins/angelscript-mcp
+~~~
+
+### Any other agent
+
+Add the MCP server below and copy `plugins/angelscript/skills/angelscript/` into the agent's skills folder.
 
 Claude Code gets two plugins: `angelscript` (the skill, the part submitted to the Claude plugin directory) and `angelscript-mcp` (the MCP server, which starts a local command and so is installed from this marketplace only).
 
@@ -94,10 +127,14 @@ Open an [issue](https://github.com/angelscript-tools/angelscript-agent-kit/issue
 
 | Project | Use |
 | --- | --- |
-| [angelscript-mcp](https://github.com/angelscript-tools/angelscript-mcp) | The MCP server behind this kit |
 | [angelscript-lsp](https://github.com/angelscript-tools/angelscript-lsp) | The language server the MCP server wraps |
 | [angelscript-cli](https://github.com/angelscript-tools/angelscript-cli) | Run and check scripts from the terminal |
+| [angelscript-mcp](https://github.com/angelscript-tools/angelscript-mcp) | The MCP server behind this kit |
 | [angelscript-dap](https://github.com/angelscript-tools/angelscript-dap) | Debugger core |
+| [angelscript-debugger-example](https://github.com/angelscript-tools/angelscript-debugger-example) | A host that shows how to embed the debugger |
+| [angelscript-jit](https://github.com/angelscript-tools/angelscript-jit) | Optional JIT compiler |
+| [angelscript-engine](https://github.com/angelscript-tools/angelscript-engine) | Patched SDK builds for AngelScript 2.20 to 2.39 |
+| [tree-sitter-angelscript](https://github.com/angelscript-tools/tree-sitter-angelscript) | Tree-sitter grammar the language server uses |
 
 ## Credits
 
