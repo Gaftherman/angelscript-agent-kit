@@ -3,8 +3,8 @@
   "version": "0.1.1",
   "description": "Skill and MCP configuration that let an AI agent read, write and validate AngelScript with the AngelScript language server.",
   "author": { "name": "Gaftherman" },
-  "homepage": "https://github.com/Gaftherman/angelscript-agent-kit",
-  "repository": "https://github.com/Gaftherman/angelscript-agent-kit",
+  "homepage": "https://github.com/angelscript-tools/angelscript-agent-kit",
+  "repository": "https://github.com/angelscript-tools/angelscript-agent-kit",
   "license": "MIT",
   "keywords": ["angelscript", "lsp", "mcp", "skill"],
   "mcpServers": "./.mcp.json"

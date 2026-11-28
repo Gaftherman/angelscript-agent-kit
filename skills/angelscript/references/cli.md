@@ -1,6 +1,6 @@
 # Running scripts with the AngelScript CLI
 
-The CLI is a standalone runtime for loose scripts: <https://github.com/Gaftherman/angelscript-cli>. Use it for scripts that do not need a host game or application. Scripts that call host-only APIs cannot run in it.
+The CLI is a standalone runtime for loose scripts: <https://github.com/angelscript-tools/angelscript-cli>. Use it for scripts that do not need a host game or application. Scripts that call host-only APIs cannot run in it.
 
 ```sh
 asc --check script.as            # compile only, exit 0 when clean

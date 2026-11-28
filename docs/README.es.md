@@ -2,17 +2,17 @@
 
 **[English](../README.md)** | **[Español](README.es.md)**
 
-Una skill y una configuración MCP para que un agente de IA lea, escriba y valide AngelScript con el [servidor de lenguaje de AngelScript](https://github.com/Gaftherman/angelscript-lsp).
+Una skill y una configuración MCP para que un agente de IA lea, escriba y valide AngelScript con el [servidor de lenguaje de AngelScript](https://github.com/angelscript-tools/angelscript-lsp).
 
 La skill enseña la gramática y el flujo de trabajo. El servidor MCP da al agente el proyecto: el punto de entrada del módulo, las reglas del motor, la API del host y los diagnósticos en vivo.
 
 ## Instalación
 
-1. Instala el servidor de lenguaje (`angel-lsp`) y ponlo en el PATH. [Releases](https://github.com/Gaftherman/angelscript-lsp/releases)
+1. Instala el servidor de lenguaje (`angel-lsp`) y ponlo en el PATH. [Releases](https://github.com/angelscript-tools/angelscript-lsp/releases)
 2. Añade el plugin en Claude Code:
 
 ~~~text
-> /plugin marketplace add Gaftherman/angelscript-agent-kit
+> /plugin marketplace add angelscript-tools/angelscript-agent-kit
 > /plugin install angelscript-agent-kit
 ~~~
 
@@ -44,7 +44,7 @@ Para otro agente, copia `skills/angelscript/` a su carpeta de skills y añade es
 - `references/rules-json.md`: cada sección de `*.angelscript.rules.json`.
 - `references/predefined.md`: cómo leer los stubs `.as.predefined`.
 - `references/workflow.md`: listas de pasos para tareas comunes.
-- `references/cli.md`: ejecutar y comprobar scripts con la [CLI de AngelScript](https://github.com/Gaftherman/angelscript-cli).
+- `references/cli.md`: ejecutar y comprobar scripts con la [CLI de AngelScript](https://github.com/angelscript-tools/angelscript-cli).
 
 ## Validar
 
@@ -54,12 +54,25 @@ python -I scripts/validate.py --compile /ruta/a/asc
 
 Comprueba los manifiestos, el frontmatter de la skill y los enlaces, y compila cada ejemplo `angelscript` con `asc --check`.
 
+## Soporte
+
+Abre un [issue](https://github.com/angelscript-tools/angelscript-agent-kit/issues). Para ayudar, lee [CONTRIBUTING.es.md](CONTRIBUTING.es.md).
+
+## Relacionados
+
+| Proyecto | Uso |
+| --- | --- |
+| [angelscript-lsp](https://github.com/angelscript-tools/angelscript-lsp) | Servidor de lenguaje y herramientas MCP de este kit |
+| [angelscript-cli](https://github.com/angelscript-tools/angelscript-cli) | Ejecuta y comprueba scripts desde el terminal |
+| [angelscript-dap](https://github.com/angelscript-tools/angelscript-dap) | Núcleo del depurador |
+
 ## Créditos
 
-- [AngelScript](https://github.com/anjo76/angelscript) de Andreas Jönsson (licencia zlib): el lenguaje que enseña este kit.
-- [Servidor de lenguaje de AngelScript](https://github.com/Gaftherman/angelscript-lsp): el servidor MCP detrás de las herramientas. Se apoya en [Relrin/tree-sitter-angelscript](https://github.com/Relrin/tree-sitter-angelscript) y en los proyectos de su sección de créditos.
-- [CLI de AngelScript](https://github.com/Gaftherman/angelscript-cli): ejecuta y comprueba los ejemplos.
+| Proyecto | Licencia | Uso |
+| --- | --- | --- |
+| [AngelScript](https://github.com/anjo76/angelscript) de Andreas Jönsson | zlib | El lenguaje que enseña este kit |
+| [Relrin/tree-sitter-angelscript](https://github.com/Relrin/tree-sitter-angelscript) | MIT | Gramática del servidor de lenguaje |
 
 ## Licencia
 
-[MIT](../LICENSE). Para ayudar, lee [CONTRIBUTING.es.md](CONTRIBUTING.es.md).
+Este repositorio se distribuye bajo la [licencia MIT](../LICENSE).

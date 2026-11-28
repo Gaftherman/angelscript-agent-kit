@@ -9,7 +9,7 @@ A rules file tells the language server how the host engine is configured, so it 
 
 `workspace_info` reports the path. No file means no host rules: only the default language rules apply.
 
-Schema: <https://raw.githubusercontent.com/Gaftherman/angelscript-lsp/main/schemas/angelscript.rules.schema.json>
+Schema: <https://raw.githubusercontent.com/angelscript-tools/angelscript-lsp/main/schemas/angelscript.rules.schema.json>
 
 ## Sections
 
@@ -30,7 +30,7 @@ Offer this when `workspace_info` reports `no-rules-file`, after asking the user 
 
 ```json
 {
-  "$schema": "https://raw.githubusercontent.com/Gaftherman/angelscript-lsp/main/schemas/angelscript.rules.schema.json",
+  "$schema": "https://raw.githubusercontent.com/angelscript-tools/angelscript-lsp/main/schemas/angelscript.rules.schema.json",
   "name": "my-host",
   "engine": { "version": "2.39.0", "source": "official" }
 }

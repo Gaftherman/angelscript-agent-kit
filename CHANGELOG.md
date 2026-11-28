@@ -10,7 +10,7 @@
 - Add `CONTRIBUTING.md` and `docs/CONTRIBUTING.es.md`, move the Spanish README to `docs/`, and add `.editorconfig` and `ruff.toml`.
 
 ---
-**Full Changelog**: https://github.com/Gaftherman/angelscript-agent-kit/compare/v0.1.0...v0.1.1
+**Full Changelog**: https://github.com/angelscript-tools/angelscript-agent-kit/compare/v0.1.0...v0.1.1
 
 ## [0.1.0] - 2026-11-24
 
